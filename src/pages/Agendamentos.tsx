@@ -3,8 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 
 const Agendamentos = () => {
+  const { toast } = useToast();
   const agendamentos = [
     {
       id: 1,
@@ -102,7 +104,10 @@ const Agendamentos = () => {
               placeholder="Buscar por cliente ou serviço..." 
               className="w-full sm:w-80"
             />
-            <Button className="bg-gradient-beauty text-white hover:opacity-90 shadow-soft">
+            <Button 
+              className="bg-gradient-beauty text-white hover:opacity-90 shadow-soft"
+              onClick={() => toast({ title: "Novo Agendamento", description: "Formulário de agendamento será aberto" })}
+            >
               Novo Agendamento
             </Button>
           </div>

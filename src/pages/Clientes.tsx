@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useToast } from "@/hooks/use-toast";
 
 const Clientes = () => {
+  const { toast } = useToast();
   const clientes = [
     {
       id: 1,
@@ -102,7 +104,10 @@ const Clientes = () => {
               placeholder="Buscar cliente..." 
               className="w-full sm:w-80"
             />
-            <Button className="bg-gradient-beauty text-white hover:opacity-90 shadow-soft">
+            <Button 
+              className="bg-gradient-beauty text-white hover:opacity-90 shadow-soft"
+              onClick={() => toast({ title: "Novo Cliente", description: "Formulário de cadastro será aberto" })}
+            >
               Novo Cliente
             </Button>
           </div>

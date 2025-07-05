@@ -3,8 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 
 const Produtos = () => {
+  const { toast } = useToast();
   const produtos = [
     {
       id: 1,
@@ -88,7 +90,10 @@ const Produtos = () => {
               placeholder="Buscar produto..." 
               className="w-full sm:w-80"
             />
-            <Button className="bg-gradient-beauty text-white hover:opacity-90 shadow-soft">
+            <Button 
+              className="bg-gradient-beauty text-white hover:opacity-90 shadow-soft"
+              onClick={() => toast({ title: "Novo Produto", description: "Formulário de cadastro será aberto" })}
+            >
               Novo Produto
             </Button>
           </div>

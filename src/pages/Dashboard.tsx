@@ -2,8 +2,11 @@ import { Calendar, TrendingUp, LayoutDashboard, Smartphone } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 
 const Dashboard = () => {
+  const { toast } = useToast();
+  
   // Dados de exemplo
   const stats = [
     {
@@ -61,7 +64,10 @@ const Dashboard = () => {
             <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
             <p className="text-muted-foreground">Bem-vinda de volta! Aqui está um resumo do seu negócio hoje.</p>
           </div>
-          <Button className="bg-gradient-beauty text-white hover:opacity-90 shadow-soft">
+          <Button 
+            className="bg-gradient-beauty text-white hover:opacity-90 shadow-soft"
+            onClick={() => toast({ title: "Novo Agendamento", description: "Funcionalidade em desenvolvimento" })}
+          >
             Novo Agendamento
           </Button>
         </div>
@@ -158,19 +164,35 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 hover:shadow-soft transition-all duration-300">
+              <Button 
+                variant="outline" 
+                className="h-20 flex flex-col items-center justify-center space-y-2 hover:shadow-soft transition-all duration-300"
+                onClick={() => toast({ title: "Novo Agendamento", description: "Redirecionando para agendamentos..." })}
+              >
                 <Calendar size={24} className="text-beauty-lilac" />
                 <span className="text-sm">Novo Agendamento</span>
               </Button>
-              <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 hover:shadow-soft transition-all duration-300">
+              <Button 
+                variant="outline" 
+                className="h-20 flex flex-col items-center justify-center space-y-2 hover:shadow-soft transition-all duration-300"
+                onClick={() => toast({ title: "Cadastrar Cliente", description: "Redirecionando para clientes..." })}
+              >
                 <LayoutDashboard size={24} className="text-beauty-rose" />
                 <span className="text-sm">Cadastrar Cliente</span>
               </Button>
-              <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 hover:shadow-soft transition-all duration-300">
+              <Button 
+                variant="outline" 
+                className="h-20 flex flex-col items-center justify-center space-y-2 hover:shadow-soft transition-all duration-300"
+                onClick={() => toast({ title: "Relatórios", description: "Funcionalidade em desenvolvimento" })}
+              >
                 <TrendingUp size={24} className="text-beauty-lilac" />
                 <span className="text-sm">Ver Relatórios</span>
               </Button>
-              <Button variant="outline" className="h-20 flex flex-col items-center justify-center space-y-2 hover:shadow-soft transition-all duration-300">
+              <Button 
+                variant="outline" 
+                className="h-20 flex flex-col items-center justify-center space-y-2 hover:shadow-soft transition-all duration-300"
+                onClick={() => toast({ title: "WhatsApp", description: "Integração em desenvolvimento" })}
+              >
                 <Smartphone size={24} className="text-beauty-rose" />
                 <span className="text-sm">Integração WhatsApp</span>
               </Button>
