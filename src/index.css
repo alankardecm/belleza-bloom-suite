@@ -8,33 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 320 20% 98%;
+    --foreground: 260 15% 25%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 320 40% 99%;
+    --card-foreground: 260 15% 25%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 320 40% 99%;
+    --popover-foreground: 260 15% 25%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 285 85% 70%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 315 35% 95%;
+    --secondary-foreground: 260 15% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 315 25% 96%;
+    --muted-foreground: 260 10% 55%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 340 50% 88%;
+    --accent-foreground: 260 15% 25%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 315 20% 92%;
+    --input: 315 20% 94%;
+    --ring: 285 85% 70%;
+
+    /* Cores customizadas para beleza */
+    --beauty-lilac: 285 85% 70%;
+    --beauty-lilac-light: 285 60% 85%;
+    --beauty-rose: 340 50% 75%;
+    --beauty-rose-light: 340 30% 90%;
+    --beauty-white: 320 20% 98%;
+    --beauty-gray: 260 10% 55%;
+
+    /* Gradientes suaves */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--beauty-lilac)), hsl(var(--beauty-rose)));
+    --gradient-soft: linear-gradient(180deg, hsl(var(--beauty-white)), hsl(var(--beauty-rose-light)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--beauty-lilac-light) / 0.1) 100%);
+
+    /* Sombras elegantes */
+    --shadow-soft: 0 4px 20px -2px hsl(var(--beauty-lilac) / 0.15);
+    --shadow-card: 0 8px 30px -4px hsl(var(--beauty-lilac) / 0.2);
+    --shadow-elegant: 0 12px 40px -8px hsl(var(--beauty-rose) / 0.25);
+
+    /* Transições suaves */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
