@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Calendar, TrendingUp, LayoutDashboard, Smartphone } from "lucide-react";
+import { Calendar, TrendingUp, LayoutDashboard, Smartphone, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +13,7 @@ const Navigation = () => {
     { title: "Agendamentos", path: "/agendamentos", icon: Calendar },
     { title: "Clientes", path: "/clientes", icon: Smartphone },
     { title: "Produtos", path: "/produtos", icon: TrendingUp },
+    { title: "Documentação", path: "/documentacao", icon: BookOpen },
   ];
 
   const isActive = (path: string) => location.pathname === path;

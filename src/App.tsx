@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Agendamentos from "./pages/Agendamentos";
 import Clientes from "./pages/Clientes";
 import Produtos from "./pages/Produtos";
+import Documentacao from "./pages/Documentacao";
 import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 
@@ -27,6 +28,7 @@ const AppContent = () => {
           <Route path="/agendamentos" element={<Agendamentos />} />
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/produtos" element={<Produtos />} />
+          <Route path="/documentacao" element={<Documentacao />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
