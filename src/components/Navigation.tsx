@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Calendar, TrendingUp, LayoutDashboard, Smartphone, BookOpen } from "lucide-react";
+import { Calendar, TrendingUp, LayoutDashboard, Smartphone, BookOpen, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navigation = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   const menuItems = [
     { title: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
@@ -18,8 +20,8 @@ const Navigation = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  // Não mostrar navegação na página inicial
-  if (location.pathname === "/") {
+  // Não mostrar navegação na página inicial ou de auth  
+  if (location.pathname === "/" || location.pathname === "/auth") {
     return null;
   }
 
@@ -89,11 +91,23 @@ const Navigation = () => {
 
         {/* User Info */}
         {(!collapsed || window.innerWidth < 768) && (
-          <div className="absolute bottom-4 left-4 right-4">
+          <div className="absolute bottom-4 left-4 right-4 space-y-3">
             <div className="bg-white rounded-lg p-3 shadow-soft">
-              <p className="font-semibold text-foreground text-sm">Salão Bella Vita</p>
+              <p className="font-semibold text-foreground text-sm">
+                {user?.email || 'Usuário'}
+              </p>
               <p className="text-xs text-muted-foreground">Plano Essencial</p>
             </div>
+            
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => signOut()}
+              className="w-full flex items-center gap-2 hover:bg-red-50 hover:border-red-200 hover:text-red-600"
+            >
+              <LogOut size={16} />
+              Sair
+            </Button>
           </div>
         )}
       </div>

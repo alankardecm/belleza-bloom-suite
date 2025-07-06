@@ -24,14 +24,14 @@ const Index = () => {
                 A plataforma completa para gestão de salões, clínicas estéticas e profissionais da beleza
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-                <Link to="/dashboard">
+                <Link to="/auth">
                   <Button size="lg" variant="secondary" className="text-lg px-8 py-4 shadow-elegant hover:shadow-card transition-all duration-300">
                     Começar Teste Gratuito
                   </Button>
                 </Link>
-                <Link to="/dashboard">
+                <Link to="/auth">
                   <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary transition-all duration-300">
-                    Ver Demonstração
+                    Fazer Login
                   </Button>
                 </Link>
               </div>
@@ -235,7 +235,7 @@ const Index = () => {
                       </li>
                     ))}
                   </ul>
-                  <Link to="/dashboard">
+                  <Link to="/auth">
                     <Button 
                       className={`w-full text-lg py-3 ${
                         plan.popular 
@@ -263,7 +263,7 @@ const Index = () => {
             <p className="text-xl mb-8 opacity-90">
               Junte-se a mais de 10.000 profissionais que já revolucionaram seus negócios de beleza
             </p>
-            <Link to="/dashboard">
+            <Link to="/auth">
               <Button size="lg" variant="secondary" className="text-xl px-12 py-4 shadow-elegant hover:shadow-card transition-all duration-300">
                 Começar Teste Gratuito de 15 Dias
               </Button>

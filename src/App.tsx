@@ -9,8 +9,11 @@ import Agendamentos from "./pages/Agendamentos";
 import Clientes from "./pages/Clientes";
 import Produtos from "./pages/Produtos";
 import Documentacao from "./pages/Documentacao";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -24,11 +27,12 @@ const AppContent = () => {
       <main className={`flex-1 transition-all duration-300 ${!isHomePage ? 'md:ml-64 pt-16 md:pt-0' : ''}`}>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/agendamentos" element={<Agendamentos />} />
-          <Route path="/clientes" element={<Clientes />} />
-          <Route path="/produtos" element={<Produtos />} />
-          <Route path="/documentacao" element={<Documentacao />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/agendamentos" element={<ProtectedRoute><Agendamentos /></ProtectedRoute>} />
+          <Route path="/clientes" element={<ProtectedRoute><Clientes /></ProtectedRoute>} />
+          <Route path="/produtos" element={<ProtectedRoute><Produtos /></ProtectedRoute>} />
+          <Route path="/documentacao" element={<ProtectedRoute><Documentacao /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -43,7 +47,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AppContent />
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
