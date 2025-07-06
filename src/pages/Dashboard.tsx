@@ -3,57 +3,48 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const { toast } = useToast();
+  const { user } = useAuth();
+  const [isNewUser, setIsNewUser] = useState(true);
   
-  // Dados de exemplo
+  // Para novos usuários, começamos com dados zerados
   const stats = [
     {
       title: "Faturamento Mensal",
-      value: "R$ 18.450",
-      change: "+12.5%",
+      value: "R$ 0,00",
+      change: "Comece agora!",
       icon: TrendingUp,
       color: "text-beauty-lilac"
     },
     {
       title: "Agendamentos Hoje",
-      value: "8",
-      change: "+2",
+      value: "0",
+      change: "Cadastre agendamentos",
       icon: Calendar,
       color: "text-beauty-rose"
     },
     {
       title: "Clientes Ativos",
-      value: "127",
-      change: "+8",
+      value: "0",
+      change: "Cadastre clientes",
       icon: LayoutDashboard,
       color: "text-beauty-lilac"
     },
     {
       title: "Taxa de Ocupação",
-      value: "89%",
-      change: "+5%",
+      value: "0%",
+      change: "Inicie o trabalho",
       icon: Smartphone,
       color: "text-beauty-rose"
     }
   ];
 
-  const agendamentosHoje = [
-    { horario: "09:00", cliente: "Maria Silva", servico: "Corte + Escova", status: "confirmado" },
-    { horario: "10:30", cliente: "Ana Santos", servico: "Manicure", status: "em-andamento" },
-    { horario: "14:00", cliente: "Carla Rodrigues", servico: "Coloração", status: "agendado" },
-    { horario: "15:30", cliente: "Fernanda Lima", servico: "Hidratação", status: "agendado" },
-    { horario: "17:00", cliente: "Juliana Costa", servico: "Design de Sobrancelhas", status: "agendado" }
-  ];
-
-  const servicosPopulares = [
-    { nome: "Corte + Escova", quantidade: 45, receita: "R$ 4.950" },
-    { nome: "Manicure", quantidade: 38, receita: "R$ 1.520" },
-    { nome: "Design de Sobrancelhas", quantidade: 32, receita: "R$ 1.280" },
-    { nome: "Coloração", quantidade: 18, receita: "R$ 3.600" },
-    { nome: "Hidratação", quantidade: 15, receita: "R$ 1.125" }
-  ];
+  const agendamentosHoje = [];
+  const servicosPopulares = [];
 
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
@@ -62,7 +53,7 @@ const Dashboard = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-            <p className="text-muted-foreground">Bem-vinda de volta! Aqui está um resumo do seu negócio hoje.</p>
+            <p className="text-muted-foreground">Bem-vindo ao BeautyManager! Configure seu salão e comece a gerenciar seus agendamentos.</p>
           </div>
           <Button 
             className="bg-gradient-beauty text-white hover:opacity-90 shadow-soft"
@@ -87,7 +78,7 @@ const Dashboard = () => {
               <CardContent>
                 <div className="text-2xl font-bold text-foreground">{stat.value}</div>
                 <p className="text-xs text-beauty-lilac">
-                  <span className="text-beauty-lilac">{stat.change}</span> em relação ao mês anterior
+                  <span className="text-beauty-lilac">{stat.change}</span>
                 </p>
               </CardContent>
             </Card>
@@ -103,30 +94,38 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {agendamentosHoje.map((agendamento, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 bg-white rounded-lg shadow-soft hover:shadow-card transition-all duration-300">
-                      <div className="flex items-center space-x-4">
-                        <div className="text-beauty-lilac font-semibold text-lg">
-                          {agendamento.horario}
+                  {agendamentosHoje.length > 0 ? (
+                    agendamentosHoje.map((agendamento, index) => (
+                      <div key={index} className="flex items-center justify-between p-4 bg-white rounded-lg shadow-soft hover:shadow-card transition-all duration-300">
+                        <div className="flex items-center space-x-4">
+                          <div className="text-beauty-lilac font-semibold text-lg">
+                            {agendamento.horario}
+                          </div>
+                          <div>
+                            <p className="font-medium text-foreground">{agendamento.cliente}</p>
+                            <p className="text-sm text-muted-foreground">{agendamento.servico}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="font-medium text-foreground">{agendamento.cliente}</p>
-                          <p className="text-sm text-muted-foreground">{agendamento.servico}</p>
-                        </div>
+                        <Badge 
+                          className={`
+                            ${agendamento.status === 'confirmado' ? 'bg-beauty-lilac text-white' : ''}
+                            ${agendamento.status === 'em-andamento' ? 'bg-beauty-rose text-white' : ''}
+                            ${agendamento.status === 'agendado' ? 'bg-beauty-rose-light text-beauty-gray' : ''}
+                          `}
+                        >
+                          {agendamento.status === 'confirmado' && 'Confirmado'}
+                          {agendamento.status === 'em-andamento' && 'Em Andamento'}
+                          {agendamento.status === 'agendado' && 'Agendado'}
+                        </Badge>
                       </div>
-                      <Badge 
-                        className={`
-                          ${agendamento.status === 'confirmado' ? 'bg-beauty-lilac text-white' : ''}
-                          ${agendamento.status === 'em-andamento' ? 'bg-beauty-rose text-white' : ''}
-                          ${agendamento.status === 'agendado' ? 'bg-beauty-rose-light text-beauty-gray' : ''}
-                        `}
-                      >
-                        {agendamento.status === 'confirmado' && 'Confirmado'}
-                        {agendamento.status === 'em-andamento' && 'Em Andamento'}
-                        {agendamento.status === 'agendado' && 'Agendado'}
-                      </Badge>
+                    ))
+                  ) : (
+                    <div className="text-center py-8">
+                      <Calendar className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
+                      <p className="text-muted-foreground">Nenhum agendamento para hoje</p>
+                      <p className="text-sm text-muted-foreground/70">Comece cadastrando seus primeiros agendamentos</p>
                     </div>
-                  ))}
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -140,17 +139,25 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {servicosPopulares.map((servico, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg shadow-soft">
-                      <div>
-                        <p className="font-medium text-foreground text-sm">{servico.nome}</p>
-                        <p className="text-xs text-muted-foreground">{servico.quantidade} serviços</p>
+                  {servicosPopulares.length > 0 ? (
+                    servicosPopulares.map((servico, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg shadow-soft">
+                        <div>
+                          <p className="font-medium text-foreground text-sm">{servico.nome}</p>
+                          <p className="text-xs text-muted-foreground">{servico.quantidade} serviços</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-semibold text-beauty-lilac text-sm">{servico.receita}</p>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <p className="font-semibold text-beauty-lilac text-sm">{servico.receita}</p>
-                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8">
+                      <TrendingUp className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
+                      <p className="text-muted-foreground">Nenhum serviço cadastrado</p>
+                      <p className="text-sm text-muted-foreground/70">Comece realizando seus primeiros atendimentos</p>
                     </div>
-                  ))}
+                  )}
                 </div>
               </CardContent>
             </Card>

@@ -7,68 +7,9 @@ import { useToast } from "@/hooks/use-toast";
 
 const Produtos = () => {
   const { toast } = useToast();
-  const produtos = [
-    {
-      id: 1,
-      nome: "Shampoo Hidratante Premium",
-      categoria: "Cuidados Capilares",
-      preco: "R$ 89,90",
-      estoque: 15,
-      estoqueMinimo: 5,
-      fornecedor: "Beauty Supply Co.",
-      ultimaCompra: "2024-01-05",
-      vendidos: 28,
-      margem: "45%"
-    },
-    {
-      id: 2,
-      nome: "Esmalte Gel UV - Vermelho",
-      categoria: "Unhas",
-      preco: "R$ 24,50",
-      estoque: 8,
-      estoqueMinimo: 10,
-      fornecedor: "Nail Pro",
-      ultimaCompra: "2024-01-10",
-      vendidos: 45,
-      margem: "60%"
-    },
-    {
-      id: 3,
-      nome: "Creme Anti-idade Gold",
-      categoria: "Facial",
-      preco: "R$ 156,00",
-      estoque: 22,
-      estoqueMinimo: 8,
-      fornecedor: "Skincare Elite",
-      ultimaCompra: "2024-01-08",
-      vendidos: 12,
-      margem: "55%"
-    },
-    {
-      id: 4,
-      nome: "Tintura Permanente - Loiro",
-      categoria: "Coloração",
-      preco: "R$ 67,90",
-      estoque: 3,
-      estoqueMinimo: 5,
-      fornecedor: "Color Master",
-      ultimaCompra: "2024-01-12",
-      vendidos: 31,
-      margem: "40%"
-    },
-    {
-      id: 5,
-      nome: "Máscara Reconstrutora",
-      categoria: "Cuidados Capilares",
-      preco: "R$ 124,90",
-      estoque: 18,
-      estoqueMinimo: 6,
-      fornecedor: "Hair Care Plus",
-      ultimaCompra: "2024-01-07",
-      vendidos: 22,
-      margem: "48%"
-    }
-  ];
+  
+  // Para novos usuários, começamos com dados zerados
+  const produtos = [];
 
   const getEstoqueStatus = (estoque: number, minimo: number) => {
     if (estoque <= minimo) return { color: 'bg-destructive text-white', text: 'Baixo' };

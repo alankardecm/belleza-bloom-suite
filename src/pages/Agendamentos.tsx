@@ -7,68 +7,9 @@ import { useToast } from "@/hooks/use-toast";
 
 const Agendamentos = () => {
   const { toast } = useToast();
-  const agendamentos = [
-    {
-      id: 1,
-      data: "2024-01-15",
-      horario: "09:00",
-      cliente: "Maria Silva",
-      telefone: "(11) 99999-9999",
-      servico: "Corte + Escova",
-      preco: "R$ 120,00",
-      status: "confirmado",
-      profissional: "Ana Paula",
-      observacoes: "Cliente prefere corte mais curto"
-    },
-    {
-      id: 2,
-      data: "2024-01-15",
-      horario: "10:30",
-      cliente: "Carla Santos",
-      telefone: "(11) 88888-8888",
-      servico: "Manicure + Pedicure",
-      preco: "R$ 80,00",
-      status: "em-andamento",
-      profissional: "Beatriz",
-      observacoes: "Esmalte vermelho"
-    },
-    {
-      id: 3,
-      data: "2024-01-15",
-      horario: "14:00",
-      cliente: "Fernanda Lima",
-      telefone: "(11) 77777-7777",
-      servico: "Coloração Completa",
-      preco: "R$ 250,00",
-      status: "agendado",
-      profissional: "Ana Paula",
-      observacoes: "Teste de mecha necessário"
-    },
-    {
-      id: 4,
-      data: "2024-01-15",
-      horario: "15:30",
-      cliente: "Juliana Costa",
-      telefone: "(11) 66666-6666",
-      servico: "Design de Sobrancelhas",
-      preco: "R$ 45,00",
-      status: "agendado",
-      profissional: "Carla",
-      observacoes: ""
-    },
-    {
-      id: 5,
-      data: "2024-01-15",
-      horario: "17:00",
-      cliente: "Patrícia Oliveira",
-      telefone: "(11) 55555-5555",
-      servico: "Hidratação + Escova",
-      preco: "R$ 90,00",
-      status: "pendente",
-      profissional: "Ana Paula",
-      observacoes: "Cabelo muito ressecado"
-    }
-  ];
+  
+  // Para novos usuários, começamos com dados zerados
+  const agendamentos = [];
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -123,7 +64,7 @@ const Agendamentos = () => {
               <Calendar className="w-4 h-4 text-beauty-lilac" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">8</div>
+              <div className="text-2xl font-bold text-foreground">0</div>
               <p className="text-xs text-beauty-lilac">agendamentos</p>
             </CardContent>
           </Card>
@@ -136,7 +77,7 @@ const Agendamentos = () => {
               <Clock className="w-4 h-4 text-beauty-rose" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">42</div>
+              <div className="text-2xl font-bold text-foreground">0</div>
               <p className="text-xs text-beauty-rose">agendamentos</p>
             </CardContent>
           </Card>
@@ -149,7 +90,7 @@ const Agendamentos = () => {
               <Percent className="w-4 h-4 text-beauty-lilac" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">89%</div>
+              <div className="text-2xl font-bold text-foreground">0%</div>
               <p className="text-xs text-beauty-lilac">do horário disponível</p>
             </CardContent>
           </Card>
@@ -162,8 +103,8 @@ const Agendamentos = () => {
               <FileText className="w-4 h-4 text-beauty-rose" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">R$ 585</div>
-              <p className="text-xs text-beauty-rose">em 8 serviços</p>
+              <div className="text-2xl font-bold text-foreground">R$ 0,00</div>
+              <p className="text-xs text-beauty-rose">em 0 serviços</p>
             </CardContent>
           </Card>
         </div>
@@ -175,67 +116,75 @@ const Agendamentos = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {agendamentos.map((agendamento) => (
-                <div key={agendamento.id} className="bg-white rounded-lg p-6 shadow-soft hover:shadow-card transition-all duration-300">
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="text-beauty-lilac font-bold text-lg">
-                          {agendamento.horario}
-                        </div>
-                        <Badge className={getStatusColor(agendamento.status)}>
-                          {getStatusText(agendamento.status)}
-                        </Badge>
-                      </div>
-                      
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <div>
-                          <p className="font-semibold text-foreground text-lg">{agendamento.cliente}</p>
-                          <p className="text-sm text-muted-foreground">{agendamento.telefone}</p>
-                          <p className="text-sm text-beauty-lilac font-medium mt-1">
-                            Profissional: {agendamento.profissional}
-                          </p>
+              {agendamentos.length > 0 ? (
+                agendamentos.map((agendamento) => (
+                  <div key={agendamento.id} className="bg-white rounded-lg p-6 shadow-soft hover:shadow-card transition-all duration-300">
+                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="text-beauty-lilac font-bold text-lg">
+                            {agendamento.horario}
+                          </div>
+                          <Badge className={getStatusColor(agendamento.status)}>
+                            {getStatusText(agendamento.status)}
+                          </Badge>
                         </div>
                         
-                        <div>
-                          <p className="font-medium text-foreground">{agendamento.servico}</p>
-                          <p className="text-beauty-rose font-semibold text-lg">{agendamento.preco}</p>
-                          {agendamento.observacoes && (
-                            <p className="text-sm text-muted-foreground italic mt-1">
-                              Obs: {agendamento.observacoes}
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="font-semibold text-foreground text-lg">{agendamento.cliente}</p>
+                            <p className="text-sm text-muted-foreground">{agendamento.telefone}</p>
+                            <p className="text-sm text-beauty-lilac font-medium mt-1">
+                              Profissional: {agendamento.profissional}
                             </p>
-                          )}
+                          </div>
+                          
+                          <div>
+                            <p className="font-medium text-foreground">{agendamento.servico}</p>
+                            <p className="text-beauty-rose font-semibold text-lg">{agendamento.preco}</p>
+                            {agendamento.observacoes && (
+                              <p className="text-sm text-muted-foreground italic mt-1">
+                                Obs: {agendamento.observacoes}
+                              </p>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="flex flex-row lg:flex-col gap-2">
-                      <Button variant="outline" size="sm" className="hover:shadow-soft transition-all duration-300">
-                        Editar
-                      </Button>
-                      <Button variant="outline" size="sm" className="hover:shadow-soft transition-all duration-300">
-                        WhatsApp
-                      </Button>
-                      {agendamento.status === 'agendado' && (
-                        <Button 
-                          size="sm" 
-                          className="bg-gradient-beauty text-white hover:opacity-90"
-                        >
-                          Confirmar
+                      <div className="flex flex-row lg:flex-col gap-2">
+                        <Button variant="outline" size="sm" className="hover:shadow-soft transition-all duration-300">
+                          Editar
                         </Button>
-                      )}
-                      {agendamento.status === 'confirmado' && (
-                        <Button 
-                          size="sm" 
-                          className="bg-beauty-rose text-white hover:opacity-90"
-                        >
-                          Iniciar
+                        <Button variant="outline" size="sm" className="hover:shadow-soft transition-all duration-300">
+                          WhatsApp
                         </Button>
-                      )}
+                        {agendamento.status === 'agendado' && (
+                          <Button 
+                            size="sm" 
+                            className="bg-gradient-beauty text-white hover:opacity-90"
+                          >
+                            Confirmar
+                          </Button>
+                        )}
+                        {agendamento.status === 'confirmado' && (
+                          <Button 
+                            size="sm" 
+                            className="bg-beauty-rose text-white hover:opacity-90"
+                          >
+                            Iniciar
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </div>
+                ))
+              ) : (
+                <div className="text-center py-8">
+                  <Calendar className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
+                  <p className="text-muted-foreground">Nenhum agendamento cadastrado</p>
+                  <p className="text-sm text-muted-foreground/70">Comece criando seus primeiros agendamentos</p>
                 </div>
-              ))}
+              )}
             </div>
           </CardContent>
         </Card>
