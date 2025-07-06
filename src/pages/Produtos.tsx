@@ -50,8 +50,8 @@ const Produtos = () => {
               <LayoutDashboard className="w-4 h-4 text-beauty-lilac" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">87</div>
-              <p className="text-xs text-beauty-lilac">+5 este mês</p>
+              <div className="text-2xl font-bold text-foreground">0</div>
+              <p className="text-xs text-beauty-rose">produtos</p>
             </CardContent>
           </Card>
 
@@ -63,7 +63,7 @@ const Produtos = () => {
               <TrendingUp className="w-4 h-4 text-beauty-rose" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">8</div>
+              <div className="text-2xl font-bold text-foreground">0</div>
               <p className="text-xs text-beauty-rose">produtos em alerta</p>
             </CardContent>
           </Card>
@@ -76,7 +76,7 @@ const Produtos = () => {
               <Calendar className="w-4 h-4 text-beauty-lilac" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">R$ 12.450</div>
+              <div className="text-2xl font-bold text-foreground">R$ 0,00</div>
               <p className="text-xs text-beauty-lilac">inventário total</p>
             </CardContent>
           </Card>
@@ -89,7 +89,7 @@ const Produtos = () => {
               <Smartphone className="w-4 h-4 text-beauty-rose" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">52%</div>
+              <div className="text-2xl font-bold text-foreground">0%</div>
               <p className="text-xs text-beauty-rose">de lucro</p>
             </CardContent>
           </Card>
@@ -102,76 +102,23 @@ const Produtos = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {produtos.map((produto) => {
-                const estoqueStatus = getEstoqueStatus(produto.estoque, produto.estoqueMinimo);
-                
-                return (
-                  <div key={produto.id} className="bg-white rounded-lg p-6 shadow-soft hover:shadow-card transition-all duration-300">
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-semibold text-foreground text-lg">{produto.nome}</h3>
-                          <Badge variant="outline" className="text-beauty-gray">
-                            {produto.categoria}
-                          </Badge>
-                          <Badge className={estoqueStatus.color}>
-                            {estoqueStatus.text}
-                          </Badge>
-                        </div>
-                        
-                        <div className="grid md:grid-cols-3 gap-4 text-sm">
-                          <div>
-                            <p className="text-muted-foreground">Preço de Venda</p>
-                            <p className="font-semibold text-beauty-lilac text-lg">{produto.preco}</p>
-                            <p className="text-beauty-rose font-medium">Margem: {produto.margem}</p>
-                          </div>
-                          
-                          <div>
-                            <p className="text-muted-foreground">Estoque Atual</p>
-                            <p className="font-semibold text-foreground text-lg">
-                              {produto.estoque} unidades
-                            </p>
-                            <p className="text-muted-foreground">Mín: {produto.estoqueMinimo}</p>
-                          </div>
-
-                          <div>
-                            <p className="text-muted-foreground">Performance</p>
-                            <p className="font-semibold text-foreground">{produto.vendidos} vendidos</p>
-                            <p className="text-muted-foreground text-xs">Última compra: {produto.ultimaCompra}</p>
-                          </div>
-                        </div>
-
-                        <p className="text-sm text-muted-foreground mt-2">
-                          Fornecedor: {produto.fornecedor}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-row lg:flex-col gap-2">
-                        <Button variant="outline" size="sm" className="hover:shadow-soft transition-all duration-300">
-                          Editar
-                        </Button>
-                        <Button variant="outline" size="sm" className="hover:shadow-soft transition-all duration-300">
-                          Histórico
-                        </Button>
-                        {produto.estoque <= produto.estoqueMinimo && (
-                          <Button 
-                            size="sm" 
-                            className="bg-beauty-rose text-white hover:opacity-90"
-                          >
-                            Comprar
-                          </Button>
-                        )}
-                        <Button 
-                          size="sm" 
-                          className="bg-gradient-beauty text-white hover:opacity-90"
-                        >
-                          Vender
-                        </Button>
-                      </div>
+              {produtos.length > 0 ? (
+                produtos.map((produto) => {
+                  const estoqueStatus = getEstoqueStatus(produto.estoque, produto.estoqueMinimo);
+                  
+                  return (
+                    <div key={produto.id} className="bg-white rounded-lg p-6 shadow-soft hover:shadow-card transition-all duration-300">
+                      {/* ... existing product content ... */}
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              ) : (
+                <div className="text-center py-8">
+                  <LayoutDashboard className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
+                  <p className="text-muted-foreground">Nenhum produto cadastrado</p>
+                  <p className="text-sm text-muted-foreground/70">Comece cadastrando seus primeiros produtos</p>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

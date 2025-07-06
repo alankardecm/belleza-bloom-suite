@@ -72,8 +72,8 @@ const Clientes = () => {
               <TrendingUp className="w-4 h-4 text-beauty-rose" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">23</div>
-              <p className="text-xs text-beauty-rose">18% do total</p>
+              <div className="text-2xl font-bold text-foreground">0</div>
+              <p className="text-xs text-beauty-rose">Comece cadastrando</p>
             </CardContent>
           </Card>
 
@@ -85,7 +85,7 @@ const Clientes = () => {
               <Calendar className="w-4 h-4 text-beauty-lilac" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">3</div>
+              <div className="text-2xl font-bold text-foreground">0</div>
               <p className="text-xs text-beauty-lilac">neste mês</p>
             </CardContent>
           </Card>
@@ -98,7 +98,7 @@ const Clientes = () => {
               <Smartphone className="w-4 h-4 text-beauty-rose" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">R$ 145</div>
+              <div className="text-2xl font-bold text-foreground">R$ 0,00</div>
               <p className="text-xs text-beauty-rose">por atendimento</p>
             </CardContent>
           </Card>
